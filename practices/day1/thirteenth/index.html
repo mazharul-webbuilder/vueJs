@@ -11,6 +11,10 @@
 <div id="app">
     <h1 v-cloak style="color: #dbb213">Fullname: {{fullName()}}</h1>
     <hr />
+    <p><a v-bind:href="url">Dynamic URL</a></p>
+    <p><a :href="url">Dynamic URL2</a></p>
+    <p v-html="raw_html"></p>
+    <hr />
     <label>First Name:</label>
     <input type="text" v-model="firstName">
     <label>Last Name:</label>

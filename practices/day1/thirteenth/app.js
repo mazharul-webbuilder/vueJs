@@ -2,7 +2,9 @@ const vm = Vue.createApp({
     data(){
         return {
             firstName: "John",
-            lastName: "Doe"
+            lastName: "Doe",
+            url: 'http://11plus.live/',
+            raw_html: '<a href="http://11plus.live/">Raw Html</a>'
         }
     },
     methods: {
