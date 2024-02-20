@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VueJs Day 1 Review</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <p>Fullname: {{ fullName() }}</p>
+    <hr>
+    <a v-bind:href="url" target="_blank">ProthomAlo</a>
+    <a :href="url" target="_blank">ProthomAlo</a>
+    <p v-html="raw_html"></p>
+    <hr>
+    <input type="text" placeholder="Enter First name" v-model="firstName">
+    <br> <br>
+    <input type="text" placeholder="Enter Last name" v-model="lastName">
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
