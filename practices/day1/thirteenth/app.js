@@ -11,3 +11,8 @@ const vm = Vue.createApp({
         }
     }
 }).mount('#app')
+
+setTimeout(() => {
+    vm.firstName = "First Name updated"
+    vm.lastName = "Last Name updated"
+}, 2000)

@@ -10,6 +10,9 @@
 <body>
 <div id="app" v-cloak>
     <p>{{ fullName() }}</p>
+    <!--Both anchor tag href are same-->
+    <a v-bind:href="url" target="_blank">Link1</a>
+    <a :href="url" target="_blank">Link2</a>
     <hr />
     <label>First Name</label>
     <input type="text" v-model="firstName">
