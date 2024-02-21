@@ -13,7 +13,8 @@ const  vm = Vue.createApp({
         fullName(){
             return `${this.firstName.toUpperCase()} ${this.lastName.toUpperCase()}`
         },
-        updateLastName(event){
+        updateLastName(message, event){
+            console.log(message)
             this.lastName = event.target.value
         }
     }
