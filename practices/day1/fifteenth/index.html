@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Day 1.1</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <h3>Full Name: <strong style="color: #5d1a9a">{{ getFullName() }}</strong></h3>
+    <hr>
+    <label>First Name</label>
+    <br><br>
+    <input type="text" v-model="firstName">
+    <br><br>
+    <label>Last Name</label>
+    <br><br>
+    <input type="text" v-model="lastName">
+    <br><br>
+    <label>Status</label>
+    <br><br>
+    <input type="text" v-model="status">
+    <hr>
+    <p>Age: {{age}}</p>
+    <p>Status: {{getStatus()}}</p>
+    <p><a v-bind:href="url" target="_blank">Favourite Site</a></p>
+    <p v-html="rawHtml"></p>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
