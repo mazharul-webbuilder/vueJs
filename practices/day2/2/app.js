@@ -21,5 +21,11 @@ const vm = Vue.createApp({
                 this.number = inputNumber
             }
         }
+    },
+    computed: {
+
+    },
+    watch: {
+
     }
 }).mount('#app')
