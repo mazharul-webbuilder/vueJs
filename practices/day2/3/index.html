@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reactivity & Two way bingind & event Control</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <h3>Fullname: {{getFullName()}}</h3>
+        <h4>Age: {{age}}</h4>
+        <h5><a :href="googleUrl" target="_blank">Google </a> <p v-html="rawHtml"></p></h5>
+        <p><input type="text" placeholder="Enter first name" v-model="firstName"></p>
+        <p><input type="text" placeholder="Enter last name" v-bind:value="lastName" v-on:input="updateLastName('lastname updated', $event)"></p>
+        <button v-on:click="age++">Increment</button>
+        <button @click="decrementAge">Decrement</button>
+
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
