@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VueJS Course</title>
+    <link rel="stylesheet" href="main.css" type="text/css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <p>{{ fullName() }}</p>
+    <!--Both anchor tag href are same-->
+    <a v-bind:href="url" target="_blank">Link1</a>
+    <a :href="url" target="_blank">Link2</a>
+    <p v-html="raw_url"></p>
+    <p>{{ typeof age}}</p>
+    <hr />
+    <label>First Name</label>
+    <input type="text" v-model.lazy.trim="firstName">
+    <label>Middle Name</label>
+    <input type="text" @keyup.enter="updateMiddleName">
+    <label>Last Name</label>
+    <input type="text" v-bind:value="lastName" v-on:input.prevent="updateLastName('update last name', $event)">
+
+    <label>Age</label>
+    <input type="number" v-model.number="age">
+
+    <!--Increment Decrement Button-->
+    <button type="button" v-on:click="increment">increment</button>
+    <button type="button" @click="age--">decrement</button>
+</div>
+
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
