@@ -1,0 +1,12 @@
+.circle{
+    height: 150px;
+    width: 150px;
+    background-color: #63e038;
+    border-radius: 50%;
+}
+
+.circle > h1{
+    color: #ffffff;
+    text-align: center;
+    padding-top: 50px;
+}
