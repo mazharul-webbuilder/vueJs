@@ -11,11 +11,18 @@
 <body>
 <div id="app">
     <p>
-        <input type="checkbox" id="example_checkbox" name="example_checkbox" value="checkbox_value">
+        <input type="checkbox" id="example_checkbox" name="example_checkbox" value="checkbox_value" v-model="isPurple">
         <label for="example_checkbox">Purple</label>
+
+        <select name="" id="" v-model="selectedColor">
+            <option value="" >White</option>
+            <option value="text-black">Text Black</option>
+            <option value="text-orange">Text Orange</option>
+        </select>
     </p>
-    <div class="circle">
-        <h1>Hi</h1>
+    <!--Inside class a object will pass with key as class name and value as condition-->
+    <div class="circle" v-bind:class="[circle_classes, selectedColor]">
+        Hi
     </div>
 </div>
 

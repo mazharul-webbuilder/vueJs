@@ -5,8 +5,20 @@
     border-radius: 50%;
 }
 
-.circle > h1{
+.circle{
     color: #ffffff;
     text-align: center;
-    padding-top: 50px;
+    vertical-align: center;
+}
+
+.purple{
+    background-color: #5d1a9a;
+}
+
+.text-black{
+    color: black;
+}
+
+.text-orange{
+    color: orange;
 }
