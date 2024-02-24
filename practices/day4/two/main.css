@@ -1,0 +1,22 @@
+.circle{
+    height: 100px;
+    width: 100px;
+    background-color: #63e038;
+    border-radius: 50%;
+    line-height: 100px;
+    text-align: center;
+    font-weight: bolder;
+    color: white;
+}
+
+.bgPurple{
+    background-color: purple;
+}
+
+.text-black{
+    color: black;
+}
+
+.text-orange{
+    color: orange;
+}
