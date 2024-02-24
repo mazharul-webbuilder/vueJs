@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <label for="purpleBG">
+        <input type="checkbox" id="purpleBG" v-model="isPurple"> Purple
+    </label>
+    <select name="" id="" v-model="textColor">
+        <option value="">Text White</option>
+        <option value="text-black">Text Black</option>
+        <option value="text-orange">Text Orange</option>
+    </select>
+    <div class="circle" :class="[circle_bg, textColor]">
+    Hi!
+</div>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
