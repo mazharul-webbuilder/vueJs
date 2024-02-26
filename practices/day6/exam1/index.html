@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exam 1</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <p :style="[updateColor]">Fullname: {{getFullName}}</p>
+    <p>Age: {{age}}</p>
+    <p><input type="text" :value="firstName" @input="updateFirstName"></p>
+    <p><input type="text" v-model.trim="lastName"></p>
+    <p>
+        <button type="button" @click="age++">Increment</button>
+        <button type="button" @click="age--">Decrement</button>
+    </p>
+    <hr>
+    <ul>
+        <li v-for="(animal, index) in animals">
+            {{animal}}
+        </li>
+    </ul>
+    <hr>
+    <ul>
+        <li v-for="person in people">
+            {{person.name}}
+        </li>
+    </ul>
+    <hr>
+    <ul>
+        <li v-for="person in people" :key="person.name">
+            <div v-for="(value, key, index) in person">
+                {{key}} : {{value}} [{{index}}]
+            </div>
+        </li>
+    </ul>
+    <hr>
+    <p v-if="mode == 1">Showing v-if</p>
+    <template v-else-if="mode == 2">
+        <p>Bonus content</p>
+        <p>showing v-else-if</p>
+    </template>
+    <p v-else>Showing v-else</p>
+    <p><i v-show="mode == 1">v-show</i></p>
+    <p><select name="" id="" v-model="mode">
+        <option value="1">v-if</option>
+        <option value="2">v-else-if</option>
+        <option value="3">v-else</option>
+    </select></p>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
