@@ -1,0 +1,23 @@
+@import "variable";
+
+/*Variable*/
+$red: #cb0b0b;
+
+
+h1{
+  color: $red;
+  transform: rotate(-7deg);
+
+  /*nested selector inside h1*/
+  span{
+    color: blue;
+  }
+
+  &:hover{ // h1:hover
+    color: darken($red, 25%);
+  }
+}
+
+h1:hover{
+  color: darken($red, 25%);
+}
