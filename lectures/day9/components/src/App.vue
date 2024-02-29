@@ -1,7 +1,6 @@
 <template>
   <greeting :age="age"></greeting>
-  <button type="button" @click.prevent="age++">Update Age</button>
-  <user :age="age"></user>
+  <user :age="age" @age-change="age++"></user>
 </template>
 
 <script>
