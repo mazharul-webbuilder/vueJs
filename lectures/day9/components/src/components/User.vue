@@ -7,7 +7,16 @@
 <script>
 export default {
   name: 'UserComponent',
-  props: ['age'],
+  props: {
+    age: {
+      type: Number,
+      required: true,
+      default: 20,
+      validator(value){
+        return value < 139
+      }
+    }
+  },
   emits: ['age-change'],
   methods: {
     ageUpdate(){
