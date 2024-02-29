@@ -1,6 +1,6 @@
 <template>
   <greeting :age="age"></greeting>
-  <user :age="age" @age-change="age++"></user>
+  <user :age="age" @age-change="updateAge"></user>
 </template>
 
 <script>
@@ -12,6 +12,11 @@ export default {
   data(){
     return{
       age: 20
+    }
+  },
+  methods:{
+    updateAge(value){
+      this.age += value
     }
   }
 }
