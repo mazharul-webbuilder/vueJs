@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div id="app">
+    <!--Without Index-->
+    <ul>
+        Loop without index
+        <li v-for="bird in birds">
+            {{bird}}
+        </li>
+    </ul>
+    <hr>
+    <!--With Index-->
+    <ul>
+        Loop with index
+        <li v-for="(bird, index) in birds" :key="bird">
+            {{bird}} - {{index}}
+        </li>
+    </ul>
+    <hr>
+    <!--one way to iterate over object data-->
+    <ul>
+        <li v-for="person in people">
+            {{person.name}} - {{person.age}}
+        </li>
+    </ul>
+    <hr>
+    <!--another way to iterate over object data-->
+    <ul>
+        <!--First loop over array-->
+        <li v-for="(person, index) in people">
+            <!--This nested loop through the object-->
+            <div v-for="(value, key, index) in person">
+                {{key}}: {{value}} - {{index}}
+            </div>
+        </li>
+    </ul>
+    <hr>
+    <ul>
+        <li v-for="person in people">
+            <div v-for="(value, key, index) in person">
+                {{key}} : {{value}} : {{index}}
+            </div>
+        </li>
+    </ul>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
