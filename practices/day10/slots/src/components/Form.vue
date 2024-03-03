@@ -1,19 +1,19 @@
 <template>
-  <form>
+  <form action="">
     <div class="help">
       <slot name="help"></slot>
     </div>
-    <div class="fields">
+    <div class="field">
       <slot name="fields"></slot>
     </div>
     <div class="buttons">
       <slot name="buttons"></slot>
     </div>
-    <slot></slot>
+    <h2>This are the defatult data</h2>
   </form>
 </template>
 <script>
-  export default {
-    name: 'FormComponent'
-  }
+export default {
+  name: 'FormComponent',
+}
 </script>

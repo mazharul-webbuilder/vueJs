@@ -1,28 +1,27 @@
 <template>
   <app-form>
-    <div class="help">
-      <p>This is some help</p>
-    </div>
-    <div class="fields">
-      <input type="text" placeholder="email">
-      <input type="text" placeholder="username">
-      <input type="password" placeholder="password">
-    </div>
-    <div class="buttons">
-      <button type="submit">Submit</button>
-    </div>
+    <template v-slot:help>
+      <p>{{ help }}</p>
+    </template>
+    <template v-slot:fields>
+      <input type="text">
+      <input type="email">
+      <input type="text">
+    </template>
+    <template v-slot:buttons>
+      <button>First form button</button>
+    </template>
+    <p>This is default text</p>
   </app-form>
+<!-- Second form -->
   <app-form>
-    <div class="help">
-      <p>This is some help</p>
-    </div>
-    <div class="fields">
-      <input type="text" placeholder="name">
+    <template v-slot:help>
+      <p>Contact Form Help center</p>
+    </template>
+    <template v-slot:fields>
+      <input type="email" placeholder="email">
       <input type="text" placeholder="message">
-    </div>
-    <div class="buttons">
-      <button type="submit">Submit</button>
-    </div>
+    </template>
   </app-form>
 </template>
 
@@ -30,14 +29,16 @@
 import AppForm from "@/components/Form.vue";
 export default {
   name: 'App',
-  components: { AppForm }
+  components: { AppForm },
+  data(){
+    return {
+      help: "This is some help text."
+    }
+  }
 }
 </script>
 
 <style>
-body{
-  background: black;
-  color: yellow;
-}
+
 </style>
 

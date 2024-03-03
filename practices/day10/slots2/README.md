@@ -1,4 +1,4 @@
-# component
+# slots2
 
 ## Project setup
 ```
