@@ -6,8 +6,10 @@
     <div class="fields">
       <slot name="fields"></slot>
     </div>
-    <div class="buttons"></div>
-
+    <div class="buttons">
+      <slot name="buttons"></slot>
+    </div>
+    <slot></slot>
   </form>
 </template>
 <script>
