@@ -1,5 +1,5 @@
 <template>
-<greeting :age="age"></greeting>
+<greeting :age="age" @age-change="ageDec"></greeting>
 <user :age="age" @age-change="age++"></user>
 </template>
 
@@ -14,6 +14,11 @@ export default {
   data(){
     return {
       age: 20
+    }
+  },
+  methods: {
+    ageDec(value){
+      this.age -= value
     }
   }
 }
