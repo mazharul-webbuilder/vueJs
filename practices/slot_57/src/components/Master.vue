@@ -2,6 +2,9 @@
   <div class="header">
     <slot name="header"></slot>
   </div>
+  <div class="content">
+      <slot name="content">
+    </div>
   <slot>This is defalut slot value</slot>
   <p>I am from own compoent</p>
   <div class="footer">
