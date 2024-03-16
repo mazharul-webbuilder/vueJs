@@ -1,25 +1,23 @@
 <template>
   <div class="result">
-    <div class="title">{{ results[resultIndex].title}}</div>
-    <div class="desc">
-      {{ results[resultIndex].desc}}
-    </div>
+    <div class="title">{{results[resultIndex].title}}</div>
+    <div class="desc">{{results[resultIndex].desc}}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ResultComponent",
-  props: ['results', 'totalCorrect'],
+  name: 'Result',
+  props: ['totalCorrect', 'results'],
   computed: {
     resultIndex(){
-      let index = 0;
-      this.results.forEach((e, i) =>{
+      let index = 0
+      this.results.forEach((e, i) => {
         if (e.min <= this.totalCorrect && e.max >= this.totalCorrect){
-          index = i;
+          index = i
         }
       })
-      return index;
+      return index
     }
   }
 }

@@ -1,25 +1,28 @@
-* {
+*{
     box-sizing: border-box;
 }
-body {
+body{
     font-size: 20px;
     font-family: sans-serif;
     padding-top: 20px;
-    background: #e6ecf1!important;
+    background: #e6ecf1;
 }
 
-.ctr {
+.ctr{
     margin: 0 auto;
     max-width: 600px;
     width: 100%;
     box-sizing: border-box;
     position: relative;
 }
-.questions-ctr {
+
+
+.questions-ctr{
     position: relative;
     width: 100%;
 }
-.question {
+
+.question{
     width: 100%;
     padding: 20px;
     font-size: 32px;
@@ -29,37 +32,44 @@ body {
     color: #fff;
     box-sizing: border-box;
 }
-.single-question {
+
+.single-question{
     position: relative;
     width: 100%;
 }
-.answer {
+
+.answer{
     border: 1px solid #8e959f;
     padding: 20px;
     font-size: 18px;
     width: 100%;
     background-color: #fff;
     transition: 0.2s linear all;
-    color: black;
 }
-.answer span {
+
+.answer span{
     display: inline-block;
     margin-left: 5px;
     font-size: 0.75em;
     font-style: italic;
 }
-.progress {
+
+.progress{
     height: 50px;
     margin-top: 10px;
     background-color: #ddd;
     position: relative;
 }
-.bar {
+
+
+.bar{
     height: 50px;
     background-color: #ff6372;
     transition: all 0.3s linear;
 }
-.status {
+
+
+.status{
     position: absolute;
     top: 15px;
     left: 0;
@@ -67,16 +77,17 @@ body {
     color: #fff;
     width: 100%;
 }
+
 .answer:not(.is-answered) {
     cursor: pointer;
 }
-.answer:not(.is-answered):hover {
+
+.answer:not(.is-answered):hover{
     background-color: #8ce200;
     border-color: #8ce200;
     color: #fff;
 }
-
-.title {
+.title{
     width: 100%;
     padding: 20px;
     font-size: 32px;
@@ -86,7 +97,10 @@ body {
     color: #fff;
     box-sizing: border-box;
 }
-.desc {
+
+
+
+.desc{
     border: 1px solid #8e959f;
     padding: 20px;
     font-size: 18px;
@@ -94,37 +108,38 @@ body {
     background-color: #fff;
     transition: 0.4s linear all;
     text-align: center;
-    color: black;
 }
-.fade-enter-from {
+
+
+.fade-enter {
     opacity: 0;
 }
-.fade-enter-active {
+
+.fade-leave-active{
     transition: all 0.3s linear;
 }
-.fade-leave-active {
+
+
+.fade-leave-active{
     transition: all 0.3s linear;
     opacity: 0;
     position: absolute;
 }
-.fade-leave-to {
-    opacity: 0;
-}
 
-.reset-btn {
+
+.reset-btn{
     background-color: #ff6372;
     border: 0;
     font-size: 22px;
     color: #fff;
-    padding: 10px 25px;
     margin: 10px auto;
     display: block;
+
 }
 
 .result{
     width: 100%;
 }
-
 
 .reset-btn:active, .reset-btn:focus, .reset-btn:hover{
     border: 0;
