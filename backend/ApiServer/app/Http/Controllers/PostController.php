@@ -16,19 +16,14 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        return Post::create([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
     }
 
     /**
@@ -36,23 +31,21 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return $post;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        return $post;
     }
 
     /**
@@ -60,6 +53,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        return $post->delete();
     }
 }
