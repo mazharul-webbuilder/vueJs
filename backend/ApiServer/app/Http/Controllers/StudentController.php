@@ -12,15 +12,32 @@ class StudentController extends Controller
      */
     public function index(): \Illuminate\Database\Eloquent\Collection
     {
-        return Student::all();
+        $students = Student::latest()->get();
+
+        $students->map(function ($student){
+            $student->created_at_mod = $student->created_at->format('Y-m-d H:m A');
+        });
+
+        return $students;
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        return Student::create($request->all());
+        $flag =  Student::create($request->all());
+        if ($flag) {
+            return response()->json([
+               'status' => 200,
+               'message' => 'Student Added Successfully'
+            ], 200);
+        } else{
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong'
+            ], 500);
+        }
     }
 
     /**
