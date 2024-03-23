@@ -18,10 +18,16 @@ const router = createRouter({
       path: '/students',
       name: 'students',
       component: () => (import('@/views/StudentView.vue'))
-    },{
+    },
+    {
       path: '/student/create',
       name: 'student.create',
       component: () => (import('@/views/StudentCreate.vue'))
+    },
+    {
+      path: '/students/:id',
+      name: 'student.edit',
+      component: () => (import('@/views/StudentEdit.vue'))
     },
   ]
 })
