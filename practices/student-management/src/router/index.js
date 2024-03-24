@@ -17,17 +17,17 @@ const router = createRouter({
     {
       path: '/students',
       name: 'students',
-      component: () => (import('@/views/StudentView.vue'))
+      component: () => import('../views/StudentsView.vue')
     },
     {
       path: '/student/create',
       name: 'student.create',
-      component: () => (import('@/views/StudentCreate.vue'))
+      component: () => import('../views/StudentCreateView.vue')
     },
     {
-      path: '/students/:id',
+      path: '/student/edit/:id',
       name: 'student.edit',
-      component: () => (import('@/views/StudentEdit.vue'))
+      component: () => import('../views/StudentEditView.vue')
     },
   ]
 })

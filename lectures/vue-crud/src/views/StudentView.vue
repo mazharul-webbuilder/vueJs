@@ -26,8 +26,8 @@
             <td>{{student.phone}}</td>
             <td>{{student.created_at_mod}}</td>
             <td>
-              <RouterLink to="/" class="btn btn-success ">Edit</RouterLink>
-              <button type="button" class="btn btn-danger ">Delete</button>
+              <RouterLink :to="{name: 'student.edit', params: {id: student.id}}" class="btn btn-success ">Edit</RouterLink>
+              <button type="button" @click.prevent="deleteStudent(student.id)" class="btn btn-danger ">Delete</button>
             </td>
           </tr>
           </tbody>
@@ -58,9 +58,18 @@ export default {
     getStudents(){
       axios.get('http://127.0.0.1:8000/api/students').then(res => {
         this.students = res.data
-        console.log(res.data)
       })
+    },
+    deleteStudent(studentId) {
+      if (confirm('Are you sure, you want to delete this data?')) {
+        axios.delete(`http://127.0.0.1:8000/api/students/${studentId}`).then(res => {
+          this.getStudents()
+        }).catch(function (error) {
+
+        })
+      }
     }
-  }
+  },
+
 }
 </script>
