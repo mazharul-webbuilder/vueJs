@@ -1,15 +1,15 @@
 import {defineStore} from "pinia";
 
 export const useUserStore = defineStore("user", {
-    state: () => ({
+    state: () => ({ // Equivalent as data
         userName: 'Global User'
     }),
-    getters: {
+    getters: { // Equivalent as computed property
         isLoggedIn(state){
             return true;
         }
     },
-    actions: {
+    actions: { // Equivalent as a methods
         setUserName(payload){
             this.userName = payload
         }
