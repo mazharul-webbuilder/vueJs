@@ -1,6 +1,6 @@
 <template>
   <div class="row mt-3">
-    <div class="col-md-10 mx-auto">
+    <div class="col mx-auto">
       <div class="card">
         <div class="card-header">
           <h4>Students <router-link type="button" class="btn-primary btn float-end" to="/student/create">Add Student</router-link></h4>

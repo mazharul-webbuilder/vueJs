@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Response;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -15,5 +17,18 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->renderable(function (RouteNotFoundException $exception){
+            return response()->json([
+                'status' => false,
+                'message' => 'User is not login',
+                'data' => null,
+            ], 401);
+        });
+        $exceptions->renderable(function (\Illuminate\Validation\ValidationException $exception){
+            return response()->json([
+                'status' => false,
+                'message' => $exception->errors(),
+                'data' => null,
+            ], 422);
+        });
     })->create();
