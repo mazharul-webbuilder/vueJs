@@ -23,9 +23,8 @@
                   Categories
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><router-link v-for="category in categories" :key="category.id" :to="{name: 'category.product', params: {slug: category.slug}}" class="dropdown-item" href="#">
+                    {{ category.name }}</router-link></li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -72,7 +71,23 @@
 </template>
 
 <script>
+import axios from "@/axios.js";
 export default {
-  name: "Header"
+  name: "Header",
+  data(){
+    return {
+      categories: ''
+    }
+  },
+  mounted() {
+    this.getCategories()
+  },
+  methods:{
+    getCategories(){
+      axios.get('/categories').then(res => {
+        this.categories = res.data
+      })
+    }
+  }
 }
 </script>

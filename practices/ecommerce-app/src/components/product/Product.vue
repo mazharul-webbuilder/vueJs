@@ -1,10 +1,10 @@
 <template>
-  <div class="col-md-3 mb-4">
+  <div class="col-md-3 mb-4" v-for="product in products" :key="product.id">
     <div class="card">
-      <img src="https://e7.pngegg.com/pngimages/646/822/png-clipart-quality-label-warranty-trademark-warranty-emblem-text.png" class="card-img-top" alt="Basic Product">
+      <img :src="product.image" class="card-img-top" alt="Basic Product" height="250" width="300">
       <div class="card-body">
-        <h5 class="card-title">Basic Product Title</h5>
-        <p class="card-text">Description of basic product.</p>
+        <h5 class="card-title text-truncate">{{ product.name }}</h5>
+        <p class="card-text text-truncate">{{ paddedShortDescription(product.short_description) }}</p>
         <div class="btn-group d-flex" role="group">
           <!-- Details Button -->
           <button type="button" class="btn btn-outline-dark">Details</button>
@@ -16,7 +16,29 @@
   </div>
 </template>
 
-
-<script >
-
+<script>
+export default {
+  name: "AppProduct",
+  props: ["products"],
+  methods: {
+    paddedShortDescription(shortDescription) {
+      const desiredLength = 50; // Adjust as needed
+      if (shortDescription.length <= desiredLength) {
+        return shortDescription;
+      } else {
+        return shortDescription.substring(0, desiredLength) + '...'; // Add ellipsis if truncated
+      }
+    }
+  }
+};
 </script>
+
+<style scoped>
+.card-title,
+.card-text {
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide any overflowing text */
+  
+  text-overflow: ellipsis; /* Add ellipsis to indicate truncation */
+}
+</style>
