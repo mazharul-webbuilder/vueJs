@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->ipAddress()->nullable();
+            $table->unsignedBigInteger('product_id');
 
             $table->foreign('product_id')->on('products')->references('id')->cascadeOnDelete();
             $table->foreign('user_id')->on('users')->references('id')->cascadeOnDelete();
