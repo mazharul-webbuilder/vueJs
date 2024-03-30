@@ -19,6 +19,7 @@ class CartFactory extends Factory
     {
         return [
             'product_id' => Product::select('id')->inRandomOrder()->first()->id,
+            'qty' => fake()->randomDigitNotZero()
         ];
     }
 }
