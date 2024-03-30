@@ -38,30 +38,7 @@
                 <a class="nav-link" href="#">Login</a>
               </li>
               <!-- Shopping Cart Dropdown -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fas fa-shopping-cart text-dark"></i> Cart
-                  <span class="badge rounded-circle bg-dark">3</span>
-                </a>
-
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="cartDropdown">
-                  <!-- Cart items -->
-                  <div class="dropdown-header">Shopping Cart</div>
-                  <!-- Example Cart Item -->
-                  <div class="dropdown-item">
-                    <img src="https://e7.pngegg.com/pngimages/646/822/png-clipart-quality-label-warranty-trademark-warranty-emblem-text.png" class="img-fluid" alt="Product Image">
-                    <div class="cart-item-details">
-                      <h6 class="card-subtitle mb-2 text-muted">Product Name</h6>
-                      <p class="card-text">Quantity: 1</p>
-                      <p class="card-text">Price: $XX.XX</p>
-                    </div>
-                  </div>
-                  <!-- Add more cart items here -->
-                  <!-- End Cart items -->
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">View Cart</a>
-                </div>
-              </li>
+              <app-cart :countCart="numberOfProductInCart"></app-cart>
               <!-- End Shopping Cart Dropdown -->
             </ul>
           </div>
@@ -72,9 +49,21 @@
 </template>
 
 <script>
+import AppCart from "@/components/cart/Cart.vue"
 import axios from "@/axios.js";
+import {useCartStore} from "@/stores/CartStore.js";
+import {mapState} from "pinia";
+
 export default {
   name: "Header",
+  components: {
+    AppCart
+  },
+  computed: {
+    ...mapState(useCartStore, {
+      numberOfProductInCart: "numberOfProductInCart"
+    })
+  },
   data(){
     return {
       categories: ''

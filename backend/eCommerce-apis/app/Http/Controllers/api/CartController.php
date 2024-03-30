@@ -17,7 +17,7 @@ class CartController extends Controller
     */
     public function addToCart(AddToCartRequest $request): JsonResponse
     {
-        $flag = false;
+        $flag = false; $countCart = 0;
 
         if ($request->user()){
             $request->merge(['user_id' => Auth::user()->id]);
@@ -39,7 +39,16 @@ class CartController extends Controller
             $cart->qty += $request->input('qty');
             $cart->save();
         }
+        // Cart Count
+        if ($flag) {
+            $countCart = DB::table('carts')->where('user_id', Auth::user()->id)->count();
+        } else {
+            $countCart = DB::table('carts')->where('ip_address', $request->ip())->count();
+        }
 
-        return response()->json(true);
+        return response()->json([
+            'status' => true,
+            'countCart' => $countCart
+        ]);
     }
 }

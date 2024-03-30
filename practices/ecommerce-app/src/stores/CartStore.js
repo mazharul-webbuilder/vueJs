@@ -9,9 +9,10 @@ export  const useCartStore = defineStore('cart', {
     },
     actions: {
         addToCart(requestData){
-            axios.post('add-to-cart', requestData).then(res => {
-                // call another axios for latest count
-            })
+            axios.post('add-to-cart', requestData)
+                .then((res) => {
+                    this.numberOfProductInCart = res.data.countCart;
+                })
         }
     }
 })
