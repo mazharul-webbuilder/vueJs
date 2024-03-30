@@ -80,4 +80,26 @@ class CartController extends Controller
         }
         return response()->json($products);
     }
+
+    /**
+     * Remove from cart
+    */
+    public function cartRemove(Request $request, string $cartId)
+    {
+        DB::table('carts')->where('id', $cartId)->delete();
+
+        if ($request->user()) {
+            $countCart = DB::table('carts')->where('user_id', Auth::user()->id)->count();
+
+            $products = Cart::with('product')->where('user_id', Auth::user()->id)->get();
+        } else{
+            $countCart = DB::table('carts')->where('ip_address', $request->ip())->count();
+
+            $products = Cart::with('product')->where('ip_address', $request->ip())->get();
+        }
+        return response()->json([
+            'products' => $products,
+            'countCart' => $countCart
+        ]);
+    }
 }
