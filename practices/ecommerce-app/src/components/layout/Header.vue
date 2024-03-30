@@ -52,7 +52,7 @@
 import AppCart from "@/components/cart/Cart.vue"
 import axios from "@/axios.js";
 import {useCartStore} from "@/stores/CartStore.js";
-import {mapState} from "pinia";
+import {mapState, mapActions} from "pinia";
 
 export default {
   name: "Header",
@@ -66,16 +66,25 @@ export default {
   },
   data(){
     return {
-      categories: ''
+      categories: '',
     }
   },
   mounted() {
+    this.countCart()
     this.getCategories()
   },
   methods:{
+    ...mapActions(useCartStore, {
+      setNumberOfProductInCart: "setNumberOfProductInCart"
+    }),
     getCategories(){
       axios.get('/categories').then(res => {
         this.categories = res.data
+      })
+    },
+    countCart(){
+      axios.get('/count-cart').then(res => {
+        this.setNumberOfProductInCart(res.data)
       })
     }
   }

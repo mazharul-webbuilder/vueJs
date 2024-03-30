@@ -51,4 +51,17 @@ class CartController extends Controller
             'countCart' => $countCart
         ]);
     }
+
+    /**
+     * Count Cart
+    */
+    public function countCart(Request $request): JsonResponse
+    {
+        if ($request->user()) {
+            $countCart = DB::table('carts')->where('user_id', Auth::user()->id)->count();
+        } else{
+            $countCart = DB::table('carts')->where('ip_address', $request->ip())->count();
+        }
+        return response()->json($countCart);
+    }
 }

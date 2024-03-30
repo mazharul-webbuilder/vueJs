@@ -13,6 +13,9 @@ export  const useCartStore = defineStore('cart', {
                 .then((res) => {
                     this.numberOfProductInCart = res.data.countCart;
                 })
+        },
+        setNumberOfProductInCart(total){
+            this.numberOfProductInCart = total
         }
     }
 })

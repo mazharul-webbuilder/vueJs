@@ -13,6 +13,7 @@ Route::get('product/{slug}', [ProductController::class, 'productDetail']);
 Route::get('category-products/{slug}', [ProductController::class, 'getCategoryWiseProduct']);
 // Cart
 Route::post('add-to-cart', [CartController::class, 'addToCart']);
+Route::get('count-cart', [CartController::class, 'countCart']);
 
 
 
