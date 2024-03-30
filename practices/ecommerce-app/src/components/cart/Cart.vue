@@ -9,12 +9,11 @@
       <!-- Cart items -->
       <div class="dropdown-header">Shopping Cart</div>
       <!-- Example Cart Item -->
-      <div class="dropdown-item">
-        <img src="https://e7.pngegg.com/pngimages/646/822/png-clipart-quality-label-warranty-trademark-warranty-emblem-text.png" class="img-fluid" alt="Product Image">
+      <div class="dropdown-item" v-for="(cart, index) in cartProducts" :key="index">
+        <img :src="cart.product.image" class="img-fluid" alt="Product Image" height="50" width="50">
         <div class="cart-item-details">
-          <h6 class="card-subtitle mb-2 text-muted">Product Name</h6>
-          <p class="card-text">Quantity: 1</p>
-          <p class="card-text">Price: $XX.XX</p>
+          <p class="card-text">Quantity: (1 x {{cart.qty}})</p>
+          <p class="card-text">Price: ({{cart.product.price}} = {{cart.product.price * cart.qty}})</p>
         </div>
       </div>
       <!-- End Cart items -->
@@ -24,8 +23,30 @@
   </li>
 </template>
 <script>
+import axios from "@/axios.js";
+import { mapState, mapActions } from "pinia";
+import { useCartStore } from "@/stores/CartStore.js";
+
 export default {
   name: "CartComponent",
-  props: ['countCart']
+  props: ['countCart'],
+  computed: {
+    ...mapState(useCartStore, {
+      cartProducts: "cartProducts"
+    })
+  },
+  mounted() {
+    this.getCartProduct()
+  },
+  methods: {
+    ...mapActions(useCartStore, {
+      setCartProducts: "setCartProducts"
+    }),
+    getCartProduct() {
+      return axios.get('/get-cart-products').then((res) => {
+        this.setCartProducts(res.data);
+      });
+    }
+  }
 }
 </script>

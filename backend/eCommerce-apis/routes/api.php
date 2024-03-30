@@ -14,6 +14,8 @@ Route::get('category-products/{slug}', [ProductController::class, 'getCategoryWi
 // Cart
 Route::post('add-to-cart', [CartController::class, 'addToCart']);
 Route::get('count-cart', [CartController::class, 'countCart']);
+Route::get('get-cart-products', [CartController::class, 'getCartProduct']);
+
 
 
 

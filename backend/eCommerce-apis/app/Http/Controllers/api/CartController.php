@@ -64,4 +64,17 @@ class CartController extends Controller
         }
         return response()->json($countCart);
     }
+
+    /**
+     * Get User Cart Product
+    */
+    public function getCartProduct(Request $request)
+    {
+        if ($request->user()) {
+            $products = Cart::with('product')->where('user_id', Auth::user()->id)->get();
+        } else{
+            $products = Cart::with('product')->where('ip_address', $request->ip())->get();
+        }
+        return response()->json($products);
+    }
 }

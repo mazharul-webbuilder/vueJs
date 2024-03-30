@@ -5,12 +5,16 @@ import 'vue3-toastify/dist/index.css'
 
 export  const useCartStore = defineStore('cart', {
     state: () => ({
-        numberOfProductInCart: 0
+        numberOfProductInCart: 0,
+        cartProducts: ''
     }),
     getters: {
 
     },
     actions: {
+        setCartProducts($products){
+            this.cartProducts = $products
+        },
         addToCart(requestData){
             axios.post('add-to-cart', requestData)
                 .then((res) => {
