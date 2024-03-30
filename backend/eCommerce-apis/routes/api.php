@@ -4,10 +4,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\CategoryController;
 use App\Http\Controllers\api\ProductController;
+use App\Http\Controllers\api\CartController;
 
 /*Frontend WithoutAuth*/
 Route::get('categories', [CategoryController::class, 'getCategories']);
 Route::get('get-products', [ProductController::class, 'getProducts']);
+Route::get('product/{slug}', [ProductController::class, 'productDetail']);
+Route::get('category-products/{slug}', [ProductController::class, 'getCategoryWiseProduct']);
+// Cart
+Route::post('add-to-cart', [CartController::class, 'addToCart']);
 
 
 

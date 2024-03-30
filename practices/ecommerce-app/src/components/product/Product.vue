@@ -7,9 +7,9 @@
         <p class="card-text text-truncate">{{ paddedShortDescription(product.short_description) }}</p>
         <div class="btn-group d-flex" role="group">
           <!-- Details Button -->
-          <button type="button" class="btn btn-outline-dark">Details</button>
+          <router-link type="button" class="btn btn-outline-dark" :to="{name: 'product.details', params: {slug: product.slug}}">Details</router-link>
           <!-- Add to Cart Button -->
-          <button type="button" class="btn btn-outline-dark">Add to Cart</button>
+          <button type="button" class="btn btn-outline-dark" @click.prevent="addToCartButtonClicked(product.id)">Add to Cart</button>
         </div>
       </div>
     </div>
@@ -17,10 +17,23 @@
 </template>
 
 <script>
+import {useCartStore} from "@/stores/CartStore.js";
+import {mapActions} from "pinia";
+
 export default {
   name: "AppProduct",
   props: ["products"],
   methods: {
+    ...mapActions(useCartStore, {
+      addToCart: "addToCart"
+    }),
+    addToCartButtonClicked(productId){
+      this.addToCart({
+        product_id: productId,
+        qty: 1
+
+      })
+    },
     paddedShortDescription(shortDescription) {
       const desiredLength = 50; // Adjust as needed
       if (shortDescription.length <= desiredLength) {
