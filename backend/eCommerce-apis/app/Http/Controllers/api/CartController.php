@@ -48,7 +48,10 @@ class CartController extends Controller
 
         return response()->json([
             'status' => true,
-            'countCart' => $countCart
+            'countCart' => $countCart,
+            'cartProducts' => $request->user() ?
+                Cart::with('product')->where('user_id', Auth::user()->id)->get() :
+                Cart::with('product')->where('ip_address', $request->ip())->get()
         ]);
     }
 
