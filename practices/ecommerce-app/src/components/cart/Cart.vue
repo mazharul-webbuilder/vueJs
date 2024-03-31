@@ -20,7 +20,7 @@
 
       <!-- End Cart items -->
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">View Cart</a>
+      <router-link class="dropdown-item" :to="{name: 'cart.show'}">View Cart</router-link>
     </div>
   </li>
 </template>

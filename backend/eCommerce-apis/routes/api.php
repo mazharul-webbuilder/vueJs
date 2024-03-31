@@ -13,6 +13,7 @@ Route::get('product/{slug}', [ProductController::class, 'productDetail']);
 Route::get('category-products/{slug}', [ProductController::class, 'getCategoryWiseProduct']);
 // Cart
 Route::post('add-to-cart', [CartController::class, 'addToCart']);
+Route::put('cart-update/{id}', [CartController::class, 'updateCart']);
 Route::get('count-cart', [CartController::class, 'countCart']);
 Route::get('get-cart-products', [CartController::class, 'getCartProduct']);
 Route::post('cart-remove/{id}', [CartController::class, 'cartRemove']);

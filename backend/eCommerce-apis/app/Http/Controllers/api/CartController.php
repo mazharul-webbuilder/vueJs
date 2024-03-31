@@ -56,6 +56,23 @@ class CartController extends Controller
     }
 
     /**
+     * Update Cart
+    */
+    public function updateCart(Request $request, string $cartId)
+    {
+        $cart = Cart::find($cartId);
+
+        $cart->update(['qty' => $request->qty ]);
+
+        return response()->json([
+            'status' => true,
+            'cartProducts' => $request->user() ?
+                Cart::with('product')->where('user_id', Auth::user()->id)->get() :
+                Cart::with('product')->where('ip_address', $request->ip())->get()
+        ]);
+    }
+
+    /**
      * Count Cart
     */
     public function countCart(Request $request): JsonResponse
