@@ -27,7 +27,7 @@
           <input type="number" :min="1" class="form-control" id="exampleInputEmail1" @input.prevent="qtyUpdate($event, cart.id)" :value="cart.qty"/>
         </div>
         <div class="divTableCol"><strong>${{cart.product.price}}</strong></div>
-        <div class="divTableCol"><strong>${{(cart.product.price * cart.qty)}}</strong></div>
+        <div class="divTableCol"><strong>${{ (cart.product.price * cart.qty).toFixed(2) }}</strong></div>
         <div class="divTableCol">
           <button type="button" class="btn btn-danger" @click.prevent="removeFromCart(cart.id)">Remove</button>
         </div>
@@ -40,7 +40,7 @@
         <div class="divTableCol"></div>
         <div class="divTableCol"><h5>Shipping Charge</h5></div>
         <div class="divTableCol">
-          <h5><strong>${{shippingCost}}</strong></h5>
+          <h5><strong>$5</strong></h5>
         </div>
       </div>
 
@@ -50,7 +50,7 @@
         <div class="divTableCol"></div>
         <div class="divTableCol"><h5>Sub Total</h5></div>
         <div class="divTableCol">
-          <h5><strong>${{subTotal}}</strong></h5>
+          <h5><strong>$150</strong></h5>
         </div>
       </div>
       <div class="rowTable">
@@ -59,7 +59,7 @@
         <div class="divTableCol"></div>
         <div class="divTableCol"><h3>Payable</h3></div>
         <div class="divTableCol">
-          <h3><strong>${{payable}}</strong></h3>
+          <h3><strong>$250</strong></h3>
         </div>
       </div>
       <div class="rowTable">
