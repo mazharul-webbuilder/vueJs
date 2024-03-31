@@ -38,11 +38,12 @@
         <div class="divTableCol"></div>
         <div class="divTableCol"></div>
         <div class="divTableCol"></div>
-        <div class="divTableCol"><h5>Subtotal</h5></div>
+        <div class="divTableCol"><h5>Shipping Charge</h5></div>
         <div class="divTableCol">
-          <h5><strong>€570.00</strong></h5>
+          <h5><strong>$5</strong></h5>
         </div>
       </div>
+
       <div class="rowTable">
         <div class="divTableCol"></div>
         <div class="divTableCol"></div>
