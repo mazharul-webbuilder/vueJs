@@ -9,24 +9,31 @@
           <div class="card-body">
             <form @submit.prevent="register">
               <div class="form-group">
-                <label for="username">Name</label>
-                <input type="text" class="form-control" id="name" v-model="name">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" v-model="model.register.name">
+                <p v-if="errors.name" class="text-danger">{{errors.name[0]}}</p>
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" v-model="email">
+                <input type="email" class="form-control" id="email" v-model="model.register.email">
+                <p v-if="errors.email" class="text-danger">{{errors.email[0]}}</p>
               </div>
               <div class="form-group">
                 <label for="phone">Phone</label>
-                <input type="text" class="form-control" id="phone" v-model="phone">
+                <input type="text" class="form-control" id="phone" v-model="model.register.phone">
+                <p v-if="errors.phone" class="text-danger">{{errors.phone[0]}}</p>
+
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" v-model="password">
+                <input type="password" class="form-control" id="password" v-model="model.register.password">
+                <p v-if="errors.password" class="text-danger">{{errors.password[0]}}</p>
               </div>
               <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
-                <input type="password" class="form-control" id="confirmPassword" v-model="confirmPassword">
+                <input type="password" class="form-control" id="confirmPassword" v-model="model.register.password_confirmation">
+                <p v-if="errors.password_confirmation" class="text-danger">{{errors.password_confirmation[0]}}</p>
+
               </div>
               <button type="submit" class="btn btn-primary mt-2">Register</button>
             </form>
@@ -38,22 +45,55 @@
 </template>
 
 <script>
+import axios from "@/axios.js";
+import {useAuthStore} from "@/stores/AuthStore.js";
+import { mapActions} from "pinia";
+
 export default {
   name: "RegisterView",
   data() {
     return {
-      name: "",
-      email: "",
-      phone: "",
-      password: "",
-      confirmPassword: ""
+      model: {
+        register: {
+          name: "",
+          email: "",
+          phone: "",
+          password: "",
+          password_confirmation: ""
+        }
+      },
+      errors: {}
     };
   },
   methods: {
+    ...mapActions(useAuthStore, {
+      setUser: "setUser",
+      setAccessToken: "setAccessToken",
+      setAccessTokenToLocalStorage: "setAccessTokenToLocalStorage"
+    }),
     register() {
-      // Add your registration logic here
-      console.log("Registration form submitted");
+      axios.post('/register', this.model.register)
+          .then((res) => {
+            this.setUser(res.data.user)
+            this.setAccessToken(res.data.accessToken)
+            this.setAccessTokenToLocalStorage(res.data.accessToken)
+            this.resetForm();
+          })
+          .catch((error) => {
+            if (error.response.status === 422) {
+              this.errors = error.response.data.errors;
+            }
+          });
+    },
+    resetForm() {
+      // Reset the form fields
+      Object.keys(this.model.register).forEach((key) => {
+        this.model.register[key] = "";
+      });
+      // Reset errors
+      this.errors = {};
     }
   }
 };
 </script>
+
