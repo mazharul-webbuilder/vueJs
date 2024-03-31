@@ -48,6 +48,7 @@
 import axios from "@/axios.js";
 import {useAuthStore} from "@/stores/AuthStore.js";
 import { mapActions} from "pinia";
+import router from "@/router/index.js";
 
 export default {
   name: "RegisterView",
@@ -78,6 +79,8 @@ export default {
             this.setAccessToken(res.data.accessToken)
             this.setAccessTokenToLocalStorage(res.data.accessToken)
             this.resetForm();
+            // Redirect to the dashboard
+            router.push('/dashboard');
           })
           .catch((error) => {
             if (error.response.status === 422) {
