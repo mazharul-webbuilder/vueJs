@@ -58,7 +58,10 @@ class CartController extends Controller
 
         return response()->json([
             'status' => true,
-            'cartProducts' => getCartProducts($request)
+            'cartProducts' => getCartProducts($request),
+            "shippingCost" => getShippingCharge(),
+            "subTotal" => getSubTotal($request),
+            "totalPayable" => getSubTotal($request) + getShippingCharge()
         ]);
     }
 
@@ -92,7 +95,10 @@ class CartController extends Controller
 
         return response()->json([
             'products' => getCartProducts($request),
-            'countCart' => countCartProducts($request)
+            'countCart' => countCartProducts($request),
+            "shippingCost" => getShippingCharge(),
+            "subTotal" => getSubTotal($request),
+            "totalPayable" => getSubTotal($request) + getShippingCharge()
         ]);
     }
 }

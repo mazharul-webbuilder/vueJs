@@ -103,12 +103,18 @@ export default {
   methods:{
     ...mapActions(useCartStore, {
       setCartProducts: "setCartProducts",
-      setNumberOfProductInCart: "setNumberOfProductInCart"
+      setNumberOfProductInCart: "setNumberOfProductInCart",
+      setShippingCharge: "setShippingCharge",
+      setSubTotal: "setSubTotal",
+      setTotalPayable: "setTotalPayable",
     }),
     qtyUpdate(event, cartId){
       this.model.product.qty = parseInt(event.target.value)
       axios.put(`/cart-update/${cartId}`, this.model.product).then((res) => {
         this.setCartProducts(res.data.cartProducts)
+        this.setShippingCharge(res.data.shippingCost);
+        this.setSubTotal(res.data.subTotal);
+        this.setTotalPayable(res.data.totalPayable);
       })
     },
     removeFromCart(cartId) {
@@ -116,6 +122,9 @@ export default {
           .then((res) => {
             this.setCartProducts(res.data.products);
             this.setNumberOfProductInCart(res.data.countCart);
+            this.setShippingCharge(res.data.shippingCost);
+            this.setSubTotal(res.data.subTotal);
+            this.setTotalPayable(res.data.totalPayable);
           })
     }
   }

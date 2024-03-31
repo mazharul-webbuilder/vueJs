@@ -54,7 +54,7 @@ if (!function_exists('getSubTotal')){
         $subTotal = 0;
 
         foreach ($carts as $cart) {
-            $subTotal += $cart->product->price;
+            $subTotal += $cart->product->price * $cart->qty;
         }
 
         return $subTotal;
