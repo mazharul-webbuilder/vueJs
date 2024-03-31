@@ -47,7 +47,7 @@ export default {
     }),
     getCartProduct() {
       return axios.get('/get-cart-products').then((res) => {
-        this.setCartProducts(res.data);
+        this.setCartProducts(res.data.cartProducts);
       });
     },
     removeFromCart(cartId) {

@@ -44,7 +44,6 @@ class CartController extends Controller
         return response()->json([
             'status' => true,
             'countCart' => countCartProducts($request),
-            'cartProducts' => getCartProducts($request)
         ]);
     }
 
@@ -76,7 +75,9 @@ class CartController extends Controller
     */
     public function getCartProduct(Request $request): JsonResponse
     {
-        return response()->json(getCartProducts($request));
+        return response()->json([
+            "cartProducts" => getCartProducts($request)
+        ]);
     }
 
     /**
