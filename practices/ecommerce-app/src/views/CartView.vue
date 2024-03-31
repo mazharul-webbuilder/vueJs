@@ -29,7 +29,7 @@
         <div class="divTableCol"><strong>${{cart.product.price}}</strong></div>
         <div class="divTableCol"><strong>${{(cart.product.price * cart.qty)}}</strong></div>
         <div class="divTableCol">
-          <button type="button" class="btn btn-danger"><span class="fa fa-remove"></span> Remove</button>
+          <button type="button" class="btn btn-danger" @click.prevent="removeFromCart(cart.id)">Remove</button>
         </div>
       </div>
       <!--Cart row end        -->
@@ -99,32 +99,26 @@ export default {
   },
   methods:{
     ...mapActions(useCartStore, {
-      setCartProducts: "setCartProducts"
+      setCartProducts: "setCartProducts",
+      setNumberOfProductInCart: "setNumberOfProductInCart"
     }),
     qtyUpdate(event, cartId){
       this.model.product.qty = parseInt(event.target.value)
       axios.put(`/cart-update/${cartId}`, this.model.product).then((res) => {
         this.setCartProducts(res.data.cartProducts)
       })
+    },
+    removeFromCart(cartId) {
+      axios.post(`/cart-remove/${cartId}`)
+          .then((res) => {
+            this.setCartProducts(res.data.products);
+            this.setNumberOfProductInCart(res.data.countCart);
+          })
     }
   }
 
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <style scoped>
 .mr-2{
