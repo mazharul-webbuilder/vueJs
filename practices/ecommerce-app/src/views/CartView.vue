@@ -1,8 +1,7 @@
 <template>
   <div class="container">
-    <div class="divTable div-hover">
-
-      <div class="rowTable bg-primary text-white pb-2">
+    <div class="divTable div-hover mt-4">
+      <div class="rowTable bg-dark text-white pb-2">
         <div class="divTableCol">Product</div>
         <div class="divTableCol">Quantity</div>
         <div class="divTableCol">Price</div>
@@ -18,8 +17,8 @@
               <img class="img-fluid" :src="cart.product.image" style="width: 92px; height: 72px; margin-left: 0" />
             </router-link>
             <div class="media-body">
-              <h4 class="media-heading">
-                <router-link class="text-dark" :to="{name: 'product.details', params: {slug: cart.product.slug}}">{{cart.product.name}}</router-link></h4>
+              <p class="media-heading">
+                <router-link class="text-dark" :to="{name: 'product.details', params: {slug: cart.product.slug}}">{{cart.product.name}}</router-link></p>
             </div>
           </div>
         </div>
