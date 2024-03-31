@@ -76,7 +76,10 @@ class CartController extends Controller
     public function getCartProduct(Request $request): JsonResponse
     {
         return response()->json([
-            "cartProducts" => getCartProducts($request)
+            "cartProducts" => getCartProducts($request),
+            "shippingCost" => getShippingCharge(),
+            "subTotal" => 150,
+            "totalPayable" => 155
         ]);
     }
 

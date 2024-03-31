@@ -40,7 +40,7 @@
         <div class="divTableCol"></div>
         <div class="divTableCol"><h5>Shipping Charge</h5></div>
         <div class="divTableCol">
-          <h5><strong>$5</strong></h5>
+          <h5><strong>${{shippingCharge}}</strong></h5>
         </div>
       </div>
 
@@ -50,7 +50,7 @@
         <div class="divTableCol"></div>
         <div class="divTableCol"><h5>Sub Total</h5></div>
         <div class="divTableCol">
-          <h5><strong>$150</strong></h5>
+          <h5><strong>${{subTotal}}</strong></h5>
         </div>
       </div>
       <div class="rowTable">
@@ -59,7 +59,7 @@
         <div class="divTableCol"></div>
         <div class="divTableCol"><h3>Payable</h3></div>
         <div class="divTableCol">
-          <h3><strong>$250</strong></h3>
+          <h3><strong>${{totalPayable}}</strong></h3>
         </div>
       </div>
       <div class="rowTable">
@@ -95,6 +95,9 @@ export default {
   computed: {
     ...mapState(useCartStore, {
       cartProducts: "cartProducts",
+      shippingCharge: "shippingCharge",
+      subTotal: "subTotal",
+      totalPayable: "totalPayable",
     })
   },
   methods:{

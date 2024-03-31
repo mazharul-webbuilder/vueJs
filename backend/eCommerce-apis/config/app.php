@@ -123,4 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    // App Shipping Charge
+    'shippingCharge' => 5
+
 ];

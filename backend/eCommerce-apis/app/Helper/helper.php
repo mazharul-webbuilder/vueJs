@@ -31,3 +31,14 @@ if (!function_exists('countCartProducts')){
 
     }
 }
+
+/**
+ * Get Shipping Charge
+ */
+if (!function_exists('getShippingCharge')){
+    function getShippingCharge()
+    {
+        return config('app.shippingCharge');
+    }
+}
+
