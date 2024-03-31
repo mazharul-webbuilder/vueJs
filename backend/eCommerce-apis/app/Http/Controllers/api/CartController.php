@@ -78,8 +78,8 @@ class CartController extends Controller
         return response()->json([
             "cartProducts" => getCartProducts($request),
             "shippingCost" => getShippingCharge(),
-            "subTotal" => 150,
-            "totalPayable" => 155
+            "subTotal" => getSubTotal($request),
+            "totalPayable" => getSubTotal($request) + getShippingCharge()
         ]);
     }
 

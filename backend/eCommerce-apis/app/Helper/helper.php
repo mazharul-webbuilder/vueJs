@@ -42,3 +42,23 @@ if (!function_exists('getShippingCharge')){
     }
 }
 
+
+/**
+ * Get SubTotal
+ */
+if (!function_exists('getSubTotal')){
+    function getSubTotal(Request $request)
+    {
+        $carts = getCartProducts($request);
+
+        $subTotal = 0;
+
+        foreach ($carts as $cart) {
+            $subTotal += $cart->product->price;
+        }
+
+        return $subTotal;
+
+    }
+}
+
