@@ -27,12 +27,18 @@ const router = createRouter({
     {
       path: '/register',
       name: 'register',
-      component: () => import('@/views/auth/RegisterView.vue')
+      component: () => import('@/views/auth/RegisterView.vue'),
+      meta: {
+        requiresAuth: false
+      }
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/auth/LoginView.vue')
+      component: () => import('@/views/auth/LoginView.vue'),
+      meta: {
+        requiresAuth: false
+      }
     },
     {
       path: '/checkout',
@@ -54,14 +60,21 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('accessToken');
   if (to.meta.requiresAuth) {
-    const token = localStorage.getItem('accessToken');
     if (token && token !== '') {
       // User is authenticated, proceed to the route
       next();
     } else {
       // User is not authenticated, redirect to login
       next('/login');
+    }
+  } else if (to.name === 'login' || to.name === 'register') {
+    // If user is authenticated, prevent access to login and register routes
+    if (token && token !== '') {
+      next('/dashboard'); // Redirect to home or dashboard route
+    } else {
+      next(); // Allow access to login and register routes
     }
   } else {
     // Non-protected route, allow access
