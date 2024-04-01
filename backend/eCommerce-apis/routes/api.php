@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\CategoryController;
 use App\Http\Controllers\api\ProductController;
 use App\Http\Controllers\api\CartController;
+use App\Http\Controllers\api\AuthController;
 
 /*Frontend WithoutAuth*/
 Route::get('categories', [CategoryController::class, 'getCategories']);
@@ -19,8 +20,10 @@ Route::get('get-cart-products', [CartController::class, 'getCartProduct']);
 Route::post('cart-remove/{id}', [CartController::class, 'cartRemove']);
 
 
-
-
+// Auth
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 
 

@@ -29,14 +29,17 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Dashboard</a>
+                <router-link class="nav-link" :to="{name: 'dashboard'}">Dashboard</router-link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Register</a>
+                <router-link class="nav-link" :to="{name: 'dashboard'}">Logout</router-link>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
-              </li>
+                <li class="nav-item">
+                  <router-link class="nav-link" :to="{name: 'register'}">Register</router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link class="nav-link" :to="{name: 'login'}">Login</router-link>
+                </li>
               <!-- Shopping Cart Dropdown -->
               <app-cart :countCart="numberOfProductInCart"></app-cart>
               <!-- End Shopping Cart Dropdown -->

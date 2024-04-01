@@ -17,7 +17,7 @@
           <p><strong>Category: </strong>{{ getCategoryName }}</p>
           <p><strong>Short Description:</strong> {{product.short_description}}</p>
           <p><strong>Full Description:</strong> {{product.long_description}}</p>
-          <p><strong>Price:</strong> {{product.price}}</p>
+          <p><strong>Price:</strong> ${{product.price}}</p>
           <!-- Add to Cart Button -->
           <div class="flex justify-content-between">
             <input type="number" class="form-control w-50" v-model="model.product.qty" min="1" value="1" step="1">

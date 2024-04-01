@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('short_description');
             $table->text('long_description');
-            $table->float('price');
+            $table->decimal('price', 10, 2);
             $table->integer('stock')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();

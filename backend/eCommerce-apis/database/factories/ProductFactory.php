@@ -15,6 +15,7 @@ class ProductFactory extends Factory
      * Define the model's default state.
      *
      * @return array<string, mixed>
+     * @throws \Exception
      */
     public function definition(): array
     {
@@ -34,7 +35,7 @@ class ProductFactory extends Factory
             ]),
             'short_description' => $this->faker->sentence(),
             'long_description' => $this->faker->text(),
-            'price' => $this->faker->randomFloat(),
+            'price' => random_int(10, 50),
             'stock' => $this->faker->numberBetween(10, 1000),
         ];
     }

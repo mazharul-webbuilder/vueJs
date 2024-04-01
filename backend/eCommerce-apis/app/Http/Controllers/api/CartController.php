@@ -17,7 +17,7 @@ class CartController extends Controller
     */
     public function addToCart(AddToCartRequest $request): JsonResponse
     {
-        $flag = false; $countCart = 0;
+        $flag = false;
 
         if ($request->user()){
             $request->merge(['user_id' => Auth::user()->id]);
@@ -33,32 +33,24 @@ class CartController extends Controller
             $cart = Cart::where('ip_address', $request->ip())->where('product_id', $request->input('product_id'))->first();
         }
 
+        // Create or Manipulate cart
         if (!$cart) {
             Cart::create($request->all());
         } else {
             $cart->qty += $request->input('qty');
             $cart->save();
         }
-        // Cart Count
-        if ($flag) {
-            $countCart = DB::table('carts')->where('user_id', Auth::user()->id)->count();
-        } else {
-            $countCart = DB::table('carts')->where('ip_address', $request->ip())->count();
-        }
 
         return response()->json([
             'status' => true,
-            'countCart' => $countCart,
-            'cartProducts' => $request->user() ?
-                Cart::with('product')->where('user_id', Auth::user()->id)->get() :
-                Cart::with('product')->where('ip_address', $request->ip())->get()
+            'countCart' => countCartProducts($request),
         ]);
     }
 
     /**
      * Update Cart
     */
-    public function updateCart(Request $request, string $cartId)
+    public function updateCart(Request $request, string $cartId): JsonResponse
     {
         $cart = Cart::find($cartId);
 
@@ -66,9 +58,10 @@ class CartController extends Controller
 
         return response()->json([
             'status' => true,
-            'cartProducts' => $request->user() ?
-                Cart::with('product')->where('user_id', Auth::user()->id)->get() :
-                Cart::with('product')->where('ip_address', $request->ip())->get()
+            'cartProducts' => getCartProducts($request),
+            "shippingCost" => getShippingCharge(),
+            "subTotal" => getSubTotal($request),
+            "totalPayable" => getSubTotal($request) + getShippingCharge()
         ]);
     }
 
@@ -77,46 +70,35 @@ class CartController extends Controller
     */
     public function countCart(Request $request): JsonResponse
     {
-        if ($request->user()) {
-            $countCart = DB::table('carts')->where('user_id', Auth::user()->id)->count();
-        } else{
-            $countCart = DB::table('carts')->where('ip_address', $request->ip())->count();
-        }
-        return response()->json($countCart);
+        return response()->json(countCartProducts($request));
     }
 
     /**
      * Get User Cart Product
     */
-    public function getCartProduct(Request $request)
+    public function getCartProduct(Request $request): JsonResponse
     {
-        if ($request->user()) {
-            $products = Cart::with('product')->where('user_id', Auth::user()->id)->get();
-        } else{
-            $products = Cart::with('product')->where('ip_address', $request->ip())->get();
-        }
-        return response()->json($products);
+        return response()->json([
+            "cartProducts" => getCartProducts($request),
+            "shippingCost" => getShippingCharge(),
+            "subTotal" => getSubTotal($request),
+            "totalPayable" => getSubTotal($request) + getShippingCharge()
+        ]);
     }
 
     /**
      * Remove from cart
     */
-    public function cartRemove(Request $request, string $cartId)
+    public function cartRemove(Request $request, string $cartId): JsonResponse
     {
         DB::table('carts')->where('id', $cartId)->delete();
 
-        if ($request->user()) {
-            $countCart = DB::table('carts')->where('user_id', Auth::user()->id)->count();
-
-            $products = Cart::with('product')->where('user_id', Auth::user()->id)->get();
-        } else{
-            $countCart = DB::table('carts')->where('ip_address', $request->ip())->count();
-
-            $products = Cart::with('product')->where('ip_address', $request->ip())->get();
-        }
         return response()->json([
-            'products' => $products,
-            'countCart' => $countCart
+            'products' => getCartProducts($request),
+            'countCart' => countCartProducts($request),
+            "shippingCost" => getShippingCharge(),
+            "subTotal" => getSubTotal($request),
+            "totalPayable" => getSubTotal($request) + getShippingCharge()
         ]);
     }
 }

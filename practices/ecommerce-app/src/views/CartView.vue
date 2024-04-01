@@ -1,8 +1,7 @@
 <template>
   <div class="container">
-    <div class="divTable div-hover">
-
-      <div class="rowTable bg-primary text-white pb-2">
+    <div class="divTable div-hover mt-4">
+      <div class="rowTable bg-dark text-white pb-2">
         <div class="divTableCol">Product</div>
         <div class="divTableCol">Quantity</div>
         <div class="divTableCol">Price</div>
@@ -18,8 +17,8 @@
               <img class="img-fluid" :src="cart.product.image" style="width: 92px; height: 72px; margin-left: 0" />
             </router-link>
             <div class="media-body">
-              <h4 class="media-heading">
-                <router-link class="text-dark" :to="{name: 'product.details', params: {slug: cart.product.slug}}">{{cart.product.name}}</router-link></h4>
+              <p class="media-heading">
+                <router-link class="text-dark" :to="{name: 'product.details', params: {slug: cart.product.slug}}">{{cart.product.name}}</router-link></p>
             </div>
           </div>
         </div>
@@ -27,9 +26,9 @@
           <input type="number" :min="1" class="form-control" id="exampleInputEmail1" @input.prevent="qtyUpdate($event, cart.id)" :value="cart.qty"/>
         </div>
         <div class="divTableCol"><strong>${{cart.product.price}}</strong></div>
-        <div class="divTableCol"><strong>${{(cart.product.price * cart.qty)}}</strong></div>
+        <div class="divTableCol"><strong>${{ (cart.product.price * cart.qty).toFixed(2) }}</strong></div>
         <div class="divTableCol">
-          <button type="button" class="btn btn-danger"><span class="fa fa-remove"></span> Remove</button>
+          <button type="button" class="btn btn-danger" @click.prevent="removeFromCart(cart.id)">Remove</button>
         </div>
       </div>
       <!--Cart row end        -->
@@ -38,18 +37,19 @@
         <div class="divTableCol"></div>
         <div class="divTableCol"></div>
         <div class="divTableCol"></div>
-        <div class="divTableCol"><h5>Subtotal</h5></div>
+        <div class="divTableCol"><h5>Shipping Charge</h5></div>
         <div class="divTableCol">
-          <h5><strong>€570.00</strong></h5>
+          <h5><strong>${{shippingCharge}}</strong></h5>
         </div>
       </div>
+
       <div class="rowTable">
         <div class="divTableCol"></div>
         <div class="divTableCol"></div>
         <div class="divTableCol"></div>
-        <div class="divTableCol"><h5>Grand Total</h5></div>
+        <div class="divTableCol"><h5>Sub Total</h5></div>
         <div class="divTableCol">
-          <h5><strong>€570.00</strong></h5>
+          <h5><strong>${{subTotal}}</strong></h5>
         </div>
       </div>
       <div class="rowTable">
@@ -58,7 +58,7 @@
         <div class="divTableCol"></div>
         <div class="divTableCol"><h3>Payable</h3></div>
         <div class="divTableCol">
-          <h3><strong>€570.00</strong></h3>
+          <h3><strong>${{totalPayable}}</strong></h3>
         </div>
       </div>
       <div class="rowTable">
@@ -94,36 +94,42 @@ export default {
   computed: {
     ...mapState(useCartStore, {
       cartProducts: "cartProducts",
+      shippingCharge: "shippingCharge",
+      subTotal: "subTotal",
+      totalPayable: "totalPayable",
     })
   },
   methods:{
     ...mapActions(useCartStore, {
-      setCartProducts: "setCartProducts"
+      setCartProducts: "setCartProducts",
+      setNumberOfProductInCart: "setNumberOfProductInCart",
+      setShippingCharge: "setShippingCharge",
+      setSubTotal: "setSubTotal",
+      setTotalPayable: "setTotalPayable",
     }),
     qtyUpdate(event, cartId){
       this.model.product.qty = parseInt(event.target.value)
       axios.put(`/cart-update/${cartId}`, this.model.product).then((res) => {
         this.setCartProducts(res.data.cartProducts)
+        this.setShippingCharge(res.data.shippingCost);
+        this.setSubTotal(res.data.subTotal);
+        this.setTotalPayable(res.data.totalPayable);
       })
+    },
+    removeFromCart(cartId) {
+      axios.post(`/cart-remove/${cartId}`)
+          .then((res) => {
+            this.setCartProducts(res.data.products);
+            this.setNumberOfProductInCart(res.data.countCart);
+            this.setShippingCharge(res.data.shippingCost);
+            this.setSubTotal(res.data.subTotal);
+            this.setTotalPayable(res.data.totalPayable);
+          })
     }
   }
 
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <style scoped>
 .mr-2{

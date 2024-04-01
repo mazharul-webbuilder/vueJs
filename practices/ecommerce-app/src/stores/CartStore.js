@@ -6,7 +6,10 @@ import 'vue3-toastify/dist/index.css'
 export  const useCartStore = defineStore('cart', {
     state: () => ({
         numberOfProductInCart: 0,
-        cartProducts: ''
+        cartProducts: '',
+        shippingCharge: 0,
+        subTotal: 0,
+        totalPayable: 0
     }),
     getters: {
 
@@ -50,6 +53,15 @@ export  const useCartStore = defineStore('cart', {
         },
         setNumberOfProductInCart(total){
             this.numberOfProductInCart = total
-        }
+        },
+        setShippingCharge(charge){
+            this.shippingCharge = charge
+        },
+        setSubTotal(subTotal){
+            this.subTotal = subTotal
+        },
+        setTotalPayable(payable){
+            this.totalPayable = payable
+        },
     }
 })

@@ -43,11 +43,17 @@ export default {
   methods: {
     ...mapActions(useCartStore, {
       setCartProducts: "setCartProducts",
-      setNumberOfProductInCart: "setNumberOfProductInCart"
+      setNumberOfProductInCart: "setNumberOfProductInCart",
+      setShippingCharge: "setShippingCharge",
+      setSubTotal: "setSubTotal",
+      setTotalPayable: "setTotalPayable",
     }),
     getCartProduct() {
       return axios.get('/get-cart-products').then((res) => {
-        this.setCartProducts(res.data);
+        this.setCartProducts(res.data.cartProducts);
+        this.setShippingCharge(res.data.shippingCost);
+        this.setSubTotal(res.data.subTotal);
+        this.setTotalPayable(res.data.totalPayable);
       });
     },
     removeFromCart(cartId) {
