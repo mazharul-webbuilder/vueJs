@@ -8,9 +8,9 @@ export const useAuthStore = defineStore('auth', {
     }),
     getters:{
         isAuthenticated(){
-            const accessToken = localStorage.getItem('accessToken')
+            this.accessToken = localStorage.getItem('accessToken')
 
-            return !!accessToken
+            return !!this.accessToken
         }
     },
     actions: {
@@ -22,6 +22,10 @@ export const useAuthStore = defineStore('auth', {
         },
         setAccessTokenToLocalStorage(token){
             localStorage.setItem('accessToken', token)
+        },
+        removeAccessToken(){
+            localStorage.removeItem('accessToken')
+            this.accessToken = ''
         }
     }
 })

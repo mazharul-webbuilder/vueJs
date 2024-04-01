@@ -28,18 +28,22 @@
                     {{ category.name }}</router-link></li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <router-link class="nav-link" :to="{name: 'dashboard'}">Dashboard</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link class="nav-link" :to="{name: 'dashboard'}">Logout</router-link>
-              </li>
+              <template v-if="isAuthenticated">
+                <li class="nav-item">
+                  <router-link class="nav-link" :to="{name: 'dashboard'}">Dashboard</router-link>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" @click.prevent="logout">Logout</a>
+                </li>
+              </template>
+              <template v-else>
                 <li class="nav-item">
                   <router-link class="nav-link" :to="{name: 'register'}">Register</router-link>
                 </li>
                 <li class="nav-item">
                   <router-link class="nav-link" :to="{name: 'login'}">Login</router-link>
                 </li>
+              </template>
               <!-- Shopping Cart Dropdown -->
               <app-cart :countCart="numberOfProductInCart"></app-cart>
               <!-- End Shopping Cart Dropdown -->
@@ -55,7 +59,11 @@
 import AppCart from "@/components/cart/Cart.vue"
 import axios from "@/axios.js";
 import {useCartStore} from "@/stores/CartStore.js";
-import {mapState, mapActions} from "pinia";
+import {mapState, mapActions, mapGetters} from "pinia";
+import { toast} from "vue3-toastify";
+import 'vue3-toastify/dist/index.css'
+import router from "@/router/index.js";
+import {useAuthStore} from "@/stores/AuthStore.js";
 
 export default {
   name: "Header",
@@ -65,6 +73,9 @@ export default {
   computed: {
     ...mapState(useCartStore, {
       numberOfProductInCart: "numberOfProductInCart"
+    }),
+    ...mapGetters(useAuthStore, {
+      isAuthenticated: "isAuthenticated"
     })
   },
   data(){
@@ -80,6 +91,9 @@ export default {
     ...mapActions(useCartStore, {
       setNumberOfProductInCart: "setNumberOfProductInCart"
     }),
+    ...mapActions(useAuthStore, {
+      'removeAccessToken' : "removeAccessToken"
+    }),
     getCategories(){
       axios.get('/categories').then(res => {
         this.categories = res.data
@@ -89,6 +103,22 @@ export default {
       axios.get('/count-cart').then(res => {
         this.setNumberOfProductInCart(res.data)
       })
+    },
+    logout(){
+      axios.post('/logout')
+          .then((res) => {
+            this.removeAccessToken()
+            setTimeout(() => {
+              toast('Logout Successfully', {
+                position: 'top-right', // Position of the notification
+                duration: 3000, // Auto close duration in milliseconds
+              })
+            }, 1000/2)
+            router.push('/')
+          })
+          .catch((error) => {
+            console.log(error)
+          })
     }
   }
 }
