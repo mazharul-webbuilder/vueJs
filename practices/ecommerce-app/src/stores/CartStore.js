@@ -21,6 +21,7 @@ export  const useCartStore = defineStore('cart', {
         addToCart(requestData){
             axios.post('add-to-cart', requestData)
                 .then((res) => {
+                    console.log(res)
                     this.numberOfProductInCart = res.data.countCart
                     this.cartProducts = res.data.cartProducts
                 })
