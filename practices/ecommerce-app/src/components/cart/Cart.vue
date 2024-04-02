@@ -28,7 +28,6 @@
 import axios from "@/axios.js";
 import { mapState, mapActions } from "pinia";
 import { useCartStore } from "@/stores/CartStore.js";
-
 export default {
   name: "CartComponent",
   props: ['countCart'],

@@ -62,7 +62,7 @@ export default {
       addToCart: "addToCart"
     }),
     getProduct(slug){
-      axios.get(`product/${slug}`).then(res => {
+      axios.get(`product/${slug}`).then((res) => {
         this.product = res.data
         this.model.product.product_id = res.data.id
       })
