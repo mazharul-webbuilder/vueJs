@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Events\OrderPlaced;
+use App\Events\OrderPlacedEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
 use App\Models\Cart;
@@ -35,6 +37,8 @@ class OrderController extends Controller
                 ]);
                 $cart->delete();
             }
+
+            event(new OrderPlacedEvent($order));
 
             return response()->json([
                 'order_id' => $order->order_id
