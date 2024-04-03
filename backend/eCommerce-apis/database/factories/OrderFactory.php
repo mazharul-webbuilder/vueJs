@@ -19,9 +19,8 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id' => Product::select('id')->inRandomOrder()->first()->id,
             'order_id' => "O_" . date('d_m_y') . Str::random(),
-            'total_order' => $this->faker->randomFloat(min: 100, max: 10000),
+            'name' => $this->faker->name
         ];
     }
 }

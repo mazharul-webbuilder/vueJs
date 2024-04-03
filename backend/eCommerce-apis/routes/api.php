@@ -6,6 +6,7 @@ use App\Http\Controllers\api\CategoryController;
 use App\Http\Controllers\api\ProductController;
 use App\Http\Controllers\api\CartController;
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\OrderController;
 
 /*Frontend WithoutAuth*/
 Route::get('categories', [CategoryController::class, 'getCategories']);
@@ -25,11 +26,6 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
-
-
-
-
-
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::middleware(['auth:sanctum'])->group(function (){
+    Route::post('place-order', [OrderController::class, 'placeOrder']);
+});

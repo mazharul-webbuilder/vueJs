@@ -68,7 +68,7 @@
         <div class="divTableCol">
         </div>
         <div class="divTableCol">
-          <button type="button" class="btn btn-success">Checkout</button>
+          <button type="button" class="btn btn-success" @click="handleCheckout">Checkout</button>
         </div>
       </div>
     </div>
@@ -79,6 +79,8 @@
 import {useCartStore} from "@/stores/CartStore.js";
 import {mapState, mapActions} from "pinia";
 import axios from "@/axios.js";
+import {useAuthStore} from "@/stores/AuthStore.js";
+import router from "@/router/index.js";
 
 export default {
   name: "CartView",
@@ -97,6 +99,9 @@ export default {
       shippingCharge: "shippingCharge",
       subTotal: "subTotal",
       totalPayable: "totalPayable",
+    }),
+    ...mapState(useAuthStore, {
+      isAuthenticated : "isAuthenticated"
     })
   },
   methods:{
@@ -125,6 +130,13 @@ export default {
             this.setSubTotal(res.data.subTotal);
             this.setTotalPayable(res.data.totalPayable);
           })
+    },
+    handleCheckout(){
+      if (this.isAuthenticated) {
+        router.push('/checkout')
+      } else {
+        router.push('/login')
+      }
     }
   }
 
