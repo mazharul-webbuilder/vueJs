@@ -23,35 +23,30 @@ class OrderController extends Controller
     */
     public function placeOrder(OrderRequest $request)
     {
-        event(new OrderCreatedEvent());
 
-//
-//
-//        try {
-//            $request->merge([
-//                "order_id" => intval('O' . date('ymdHis') . rand(2, 5))
-//            ]);
-//            $order = Order::create($request->all());
-//
-//            $carts = Cart::where('user_id', Auth::user()->id)->orWhere('ip_address', $request->ip())->get();
-//
-//            foreach ($carts as $cart) {
-//                OrderDetail::create([
-//                    'order_id' => $order->order_id,
-//                    'product_id' => $cart->product_id,
-//                    'quantity' => $cart->qty,
-//                ]);
+        try {
+            $request->merge([
+                "order_id" => intval('O' . date('ymdHis') . rand(2, 5))
+            ]);
+            $order = Order::create($request->all());
+
+            $carts = Cart::where('user_id', Auth::user()->id)->orWhere('ip_address', $request->ip())->get();
+
+            foreach ($carts as $cart) {
+                OrderDetail::create([
+                    'order_id' => $order->order_id,
+                    'product_id' => $cart->product_id,
+                    'quantity' => $cart->qty,
+                ]);
 //                $cart->delete();
-//            }
-//
-//
-//
-//            return response()->json([
-//                'order_id' => $order->order_id
-//            ]);
-//        } catch(\Exception $exception){
-//            return response()->json($exception->getMessage());
-//        }
+            }
+
+            return response()->json([
+                'order_id' => $order->order_id
+            ]);
+        } catch(\Exception $exception){
+            return response()->json($exception->getMessage());
+        }
 
     }
 }
