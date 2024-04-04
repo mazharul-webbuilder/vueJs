@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -26,7 +27,7 @@ class OrderController extends Controller
 
         try {
             $request->merge([
-                "order_id" => intval('O' . date('ymdHis') . rand(2, 5))
+                "order_id" => "O_" . date('d_m_y') . Str::random(),
             ]);
             $order = Order::create($request->all());
 
@@ -34,7 +35,7 @@ class OrderController extends Controller
 
             foreach ($carts as $cart) {
                 OrderDetail::create([
-                    'order_id' => $order->order_id,
+                    'order_id' => $order->id,
                     'product_id' => $cart->product_id,
                     'quantity' => $cart->qty,
                 ]);
