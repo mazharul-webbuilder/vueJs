@@ -84,6 +84,7 @@ import {mapState, mapActions} from "pinia";
 import axios from "@/axios.js";
 import { toast} from "vue3-toastify";
 import 'vue3-toastify/dist/index.css'
+import router from "@/router/index.js";
 
 export default {
   name: "Checkout",
@@ -122,13 +123,16 @@ export default {
 
       axios.post('/place-order', this.model.checkoutData)
           .then((res) => {
+            this.errors = ''
             this.setCartCount(0)
             this.setCartProducts('')
+            router.push('/order-confirmed')
 
             toast.success('Order placed successfully', {
               isLoading: false, // Set to true to show a loading spinner
               position: 'top-right', // Position of the notification
               duration: 3000,})
+
 
           })
           .catch((error) => {

@@ -21,9 +21,11 @@ export  const useCartStore = defineStore('cart', {
         addToCart(requestData){
             axios.post('add-to-cart', requestData)
                 .then((res) => {
-                    console.log(res)
                     this.numberOfProductInCart = res.data.countCart
                     this.cartProducts = res.data.cartProducts
+                    this.shippingCharge = res.data.shippingCost
+                    this.subTotal = res.data.subTotal
+                    this.totalPayable = res.data.totalPayable
                 })
             // Show Notification
             // npm install --save vue3-toastify

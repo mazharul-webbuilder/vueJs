@@ -49,6 +49,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/order-confirmed',
+      name: 'order.place',
+      component: () => import('@/views/OrderGreetingView.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('@/views/dashboard/DashboardView.vue'),
