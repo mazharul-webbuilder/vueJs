@@ -9,5 +9,6 @@
 </head>
 <body>
 <h1>Your order is placed successfully</h1>
+<p>{{$order}}</p>
 </body>
 </html>
