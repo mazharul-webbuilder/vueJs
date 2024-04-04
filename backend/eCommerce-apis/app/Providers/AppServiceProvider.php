@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Events\OrderCreatedEvent;
-use App\Listeners\OrderCreatedListener;
+use App\Events\OrderTakenEvent;
+use App\Listeners\OrderTakenListener;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Event::listen(OrderCreatedEvent::class, OrderCreatedListener::class);
+        Event::listen(OrderTakenEvent::class, OrderTakenListener::class);
     }
 }
