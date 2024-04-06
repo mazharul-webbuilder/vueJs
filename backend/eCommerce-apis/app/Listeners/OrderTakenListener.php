@@ -2,13 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Events\OrderCreatedEvent;
-use App\Jobs\OrderPlacedJob;
+use App\Events\OrderTakenEvent;
+use App\Jobs\OrderConfimationJob;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 
-class OrderCreatedListener implements ShouldQueue
+class OrderTakenListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -21,8 +21,11 @@ class OrderCreatedListener implements ShouldQueue
     /**
      * Handle the event.
      */
-    public function handle(OrderCreatedEvent $event): void
+    public function handle(OrderTakenEvent $event): void
     {
-        OrderPlacedJob::dispatch();
+        Log::info('I am from OrderTakenListener handle method');
+
+        OrderConfimationJob::dispatch($event->order);
+
     }
 }

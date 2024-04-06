@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -9,7 +10,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OrderConfirmationMail extends Mailable
+class OrderTakenMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -17,10 +18,10 @@ class OrderConfirmationMail extends Mailable
      * Create a new message instance.
      */
     public function __construct(
-        public $order
+        public Order $order
     )
     {
-
+        //
     }
 
     /**
@@ -29,7 +30,7 @@ class OrderConfirmationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Confirmation Mail',
+            subject: 'Order Taken Mail',
         );
     }
 
