@@ -1,2 +1,2 @@
 # vueJs
-Learning and Practicing VueJs
+Learning and Practicing VueJs and Develop a E-commerce Application 
