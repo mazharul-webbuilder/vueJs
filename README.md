@@ -1,2 +1,2 @@
 # vueJs
-Learning and Practicing VueJs and Develop a E-commerce Application 
+Learning and Practicing VueJs and Developing an E-commerce Application with backend Laravel, Communicating through API
